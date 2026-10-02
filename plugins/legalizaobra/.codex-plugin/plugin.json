@@ -5,10 +5,25 @@
     "longDescription": "Connect LegalizaObra to chat to regularize the INSS of construction works in Brazil: register clients, obras and pedreiros, simulate INSS costs, send obras to eSocial and generate each month's DARF. Bundled skills teach the agent each workflow step by step.",
     "developerName": "LegalizaObra",
     "category": "Productivity",
-    "defaultPrompt": "Show me what I can do with my LegalizaObra account.",
-    "capabilities": [],
+    "defaultPrompt": [
+      "Show me what I can do with my LegalizaObra account.",
+      "Simulate the INSS of a 120 m² house built in São Paulo.",
+      "Which of my obras still need this month's DARF?"
+    ],
+    "capabilities": [
+      "Register clients and obras",
+      "Manage pedreiros on an obra",
+      "Simulate INSS and create quotes",
+      "Send obras to eSocial",
+      "Generate the monthly DARF"
+    ],
     "logo": "./assets/legalizaobra.png",
-    "composerIcon": "./assets/legalizaobra.png"
+    "composerIcon": "./assets/legalizaobra.png",
+    "websiteURL": "https://legalizaobra.com",
+    "supportURL": "https://legalizaobra.com/contato",
+    "privacyPolicyURL": "https://legalizaobra.com/politica-de-privacidade",
+    "termsOfServiceURL": "https://legalizaobra.com/termos-de-uso",
+    "brandColor": "#146971"
   },
   "name": "legalizaobra",
   "version": "0.3.0",

@@ -27,8 +27,9 @@ tests/test_plugins.py             Offline regression checks
 
 ## Current status
 
-The source version is **0.3.0**. It adds the Claude manifest and marketplace to the
-0.2.0 package, without changing its name, endpoint, skills or icon.
+The source version is **0.3.0**. It adds the Claude manifest and marketplace, moves
+the MCP endpoint to `https://api.legalizaobra.com/mcp`, and adds the OpenAI directory
+submission metadata. The package name, skills and icon do not change.
 
 OAuth login, MCP initialization, tool discovery (50 tools) and a read-only tool call
 were verified against production on 2026-10-02, after the Supabase project moved to

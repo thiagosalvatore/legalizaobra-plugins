@@ -30,7 +30,7 @@ which handles both key types.
 To check a login without the plugin, use a separate server name:
 
 ```sh
-SERVER='mcp_servers.legalizaobra-debug.url="https://tsixskhxm25cenfxnpcwhhk3ze0wdzxj.lambda-url.sa-east-1.on.aws/mcp"'
+SERVER='mcp_servers.legalizaobra-debug.url="https://api.legalizaobra.com/mcp"'
 codex mcp login legalizaobra-debug -c "$SERVER"
 codex mcp logout legalizaobra-debug -c "$SERVER"
 ```
@@ -65,7 +65,7 @@ To test the same endpoint independently of the installed plugin, use a distinct
 configuration name so you do not overwrite an existing direct server:
 
 ```sh
-codex mcp add legalizaobra-debug --url https://tsixskhxm25cenfxnpcwhhk3ze0wdzxj.lambda-url.sa-east-1.on.aws/mcp
+codex mcp add legalizaobra-debug --url https://api.legalizaobra.com/mcp
 codex mcp login legalizaobra-debug
 ```
 
@@ -105,7 +105,7 @@ For a quick unauthenticated header inspection from an environment with network:
 
 ```sh
 curl --silent --show-error --max-time 15 --dump-header - --output /dev/null \
-  'https://tsixskhxm25cenfxnpcwhhk3ze0wdzxj.lambda-url.sa-east-1.on.aws/mcp'
+  'https://api.legalizaobra.com/mcp'
 ```
 
 Do not paste tokens, authorization codes, cookies, client secrets, or customer data

@@ -31,7 +31,7 @@ not read the root `plugin.json` or `mcp.json`.
 Both MCP configurations point to:
 
 ```text
-https://tsixskhxm25cenfxnpcwhhk3ze0wdzxj.lambda-url.sa-east-1.on.aws/mcp
+https://api.legalizaobra.com/mcp
 ```
 
 ## Connection and authentication

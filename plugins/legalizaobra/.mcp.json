@@ -2,7 +2,7 @@
   "mcpServers": {
     "legalizaobra": {
       "type": "http",
-      "url": "https://tsixskhxm25cenfxnpcwhhk3ze0wdzxj.lambda-url.sa-east-1.on.aws/mcp",
+      "url": "https://api.legalizaobra.com/mcp",
       "headers": {}
     }
   }
