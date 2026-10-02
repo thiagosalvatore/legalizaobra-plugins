@@ -55,7 +55,7 @@ Mande o usuário para https://legalizaobra.com nestes casos:
 - Convidar pessoas e mudar papéis da equipe.
 - Criar ou editar modelos de contrato.
 - Importar remunerações antigas do eSocial (arquivos XML).
-- Mudar o plano. Para isso, `get_billing_portal_link` gera o link do portal de pagamento.
+- Assinar ou mudar o plano, trocar o cartão e ver as faturas.
 
 O programa de indicação (código, indicações e créditos) aparece em `get_referral_summary`. Os valores vêm em centavos.
 
@@ -63,5 +63,5 @@ O programa de indicação (código, indicações e créditos) aparece em `get_re
 
 - "Não encontramos uma conta Legaliza Obra para este login": o usuário entrou com um e-mail diferente do que usa no app.
 - "Seu usuário não tem permissão…": o papel do usuário não permite a ação. Peça para um administrador da conta.
-- "Você precisa de uma assinatura ativa…": a conta não tem plano ativo. Ofereça `get_billing_portal_link`.
+- "Você precisa de uma assinatura ativa…": a conta não tem plano ativo. O usuário assina no app.
 - Links de download (`get_darf_link`, `get_quote_pdf_link` etc.) valem 15 minutos. Se expirar, gere outro.

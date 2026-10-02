@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.4
+
+- Match the skills to backend PRs #86 and #87. The MCP server now lists 47 tools.
+- `get_billing_portal_link` is gone. The skills send the user to the app to
+  subscribe or change plan.
+- `get_obra` and `list_employees` return each pedreiro's name and ids, not their
+  personal data. When the eSocial rejects a pedreiro, `enviar-obra-ao-esocial` shows
+  the reason from the message and asks the user for the correct value.
+- `docs/releasing.md`: update the review risks.
+
 ## 0.3.3
 
 - Add the demo video for the OpenAI review as `review.demo_recording_url` in the root

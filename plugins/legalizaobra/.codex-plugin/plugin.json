@@ -26,7 +26,7 @@
     "brandColor": "#146971"
   },
   "name": "legalizaobra",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Regularize the INSS of construction works in Brazil: manage clients, obras and pedreiros, simulate INSS costs, send obras to eSocial and generate the monthly DARF.",
   "author": {
     "name": "LegalizaObra",
