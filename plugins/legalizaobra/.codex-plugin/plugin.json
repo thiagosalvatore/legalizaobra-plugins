@@ -1,0 +1,24 @@
+{
+  "interface": {
+    "displayName": "LegalizaObra",
+    "shortDescription": "Access your LegalizaObra tools",
+    "longDescription": "Connect to LegalizaObra and use the capabilities exposed by its MCP server directly in chat. This initial release provides the MCP connection only, without bundled skills or a custom interface.",
+    "developerName": "LegalizaObra",
+    "category": "Productivity",
+    "defaultPrompt": "Show me what I can do with my LegalizaObra account.",
+    "capabilities": []
+  },
+  "name": "legalizaobra",
+  "version": "0.1.1",
+  "description": "Connect to the LegalizaObra MCP server and access the tools available to your LegalizaObra account.",
+  "author": {
+    "name": "LegalizaObra",
+    "url": "https://legalizaobra.com"
+  },
+  "keywords": [
+    "legalizaobra",
+    "mcp"
+  ],
+  "homepage": "https://legalizaobra.com",
+  "mcpServers": "./.mcp.json"
+}

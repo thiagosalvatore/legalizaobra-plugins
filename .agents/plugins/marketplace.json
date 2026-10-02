@@ -1,0 +1,20 @@
+{
+  "name": "legalizaobra-plugins",
+  "interface": {
+    "displayName": "LegalizaObra Plugins"
+  },
+  "plugins": [
+    {
+      "name": "legalizaobra",
+      "source": {
+        "source": "local",
+        "path": "./plugins/legalizaobra"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
