@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.3.1
+
+- Match the skills to the MCP server after it stopped taking and returning CPF and
+  CNPJ. The server now lists 48 tools.
+- `gerenciar-pedreiros`: `add_new_employee_to_obra` and `create_employee` are gone.
+  A new pedreiro is registered in the app, then added with
+  `add_existing_employee_to_obra`.
+- `cadastrar-obra` and `simular-inss-e-orcamento`: clients are found by name, and
+  `create_client` and `create_quote_from_simulation` no longer take a `document`. The
+  user enters the client's CPF/CNPJ in the app.
+- `delete_document` is now `cancel_contract_signature`. `get_document` no longer
+  returns the contract PDF; use `get_contract_preview_link`.
+- `enviar-obra-ao-esocial`: the procuração step no longer reads
+  `authorized_document`, and rejected pedreiros are shown without their CPF.
+- `visao-geral`: the skills never ask the user for a CPF or a CNPJ.
+
 ## 0.3.0
 
 - Add the Claude plugin. `plugins/legalizaobra` now has `.claude-plugin/plugin.json`,

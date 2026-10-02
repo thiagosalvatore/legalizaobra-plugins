@@ -1,7 +1,7 @@
 {
   "name": "legalizaobra",
   "displayName": "LegalizaObra",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Connect to the LegalizaObra MCP server and access the tools available to your LegalizaObra account.",
   "author": {
     "name": "LegalizaObra",
