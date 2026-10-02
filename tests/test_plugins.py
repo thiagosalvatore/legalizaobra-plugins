@@ -93,6 +93,7 @@ class PluginPackageTests(unittest.TestCase):
             self.assertTrue(case.get("prompt"))
         for key in ("test_credentials", "reviewer_instructions"):
             self.assertNotIn(key, review)
+        self.assertTrue(review["demo_recording_url"].startswith("https://"))
 
     def test_claude_marketplace_resolves_plugin_from_repository_root(self):
         catalog = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text())

@@ -95,7 +95,8 @@ The root `plugin.json` holds everything OpenAI imports from the ZIP, under
 - `interface`: the listing text, the four listing URLs, `capabilities`, up to three
   `defaultPrompt` values, `brandColor` and the icon.
 - `onboardingSkill`: `visao-geral`.
-- `review`: five positive and three negative test cases, and `commerce: false`.
+- `review`: five positive and three negative test cases, `demo_recording_url` and
+  `commerce: false`.
 - `publication`: `countries: ["BR"]`, the release notes and the pt-BR subtitle and
   description.
 
@@ -119,7 +120,8 @@ so a reviewer can run it without filing anything with the government.
 4. A reviewer test account exists. It signs in with email and password, without MFA,
    email codes or magic links. It has at least two obras, one of them sent to eSocial
    with a generated DARF, and pedreiros on each obra. Every positive case works with it.
-5. A video shows the five positive cases, and a reviewer can open its URL.
+5. A video shows the five positive cases, and a reviewer can open its URL without
+   signing in. The URL is `review.demo_recording_url` in the root `plugin.json`.
 
 ### Upload and submit
 
