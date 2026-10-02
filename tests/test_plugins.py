@@ -5,6 +5,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PLUGIN = ROOT / "plugins" / "legalizaobra"
+MCP_ENDPOINT = "https://api.legalizaobra.com/mcp"
+FIRST_DEFAULT_PROMPT = "Show me what I can do with my LegalizaObra account."
+OPENAI_LISTING_URLS = ("websiteURL", "supportURL", "privacyPolicyURL", "termsOfServiceURL")
 SHARED_IDENTITY_FIELDS = ("name", "version", "description", "author", "homepage", "keywords", "repository", "license")
 
 
@@ -31,7 +34,12 @@ class PluginPackageTests(unittest.TestCase):
         self.assertRegex(portable["version"], r"^\d+\.\d+\.\d+$")
         ui = portable["extensions"]["com.openai"]["interface"]
         self.assertLessEqual(len(ui["shortDescription"]), 30)
-        self.assertEqual(ui["defaultPrompt"], "Show me what I can do with my LegalizaObra account.")
+        prompts = ui["defaultPrompt"]
+        self.assertEqual(prompts[0], FIRST_DEFAULT_PROMPT)
+        self.assertLessEqual(len(prompts), 3)
+        self.assertEqual(len(set(prompts)), len(prompts))
+        for prompt in prompts:
+            self.assertLessEqual(len(prompt), 128)
         for key, value in ui.items():
             self.assertEqual(value, legacy["interface"][key], key)
 
@@ -44,10 +52,9 @@ class PluginPackageTests(unittest.TestCase):
         self.assertEqual(load(".mcp.json")["mcpServers"]["legalizaobra"]["type"], "http")
 
     def test_both_mcp_configs_use_same_endpoint_without_credentials(self):
-        expected = "https://tsixskhxm25cenfxnpcwhhk3ze0wdzxj.lambda-url.sa-east-1.on.aws/mcp"
         for filename in ("mcp.json", ".mcp.json"):
             server = load(filename)["mcpServers"]["legalizaobra"]
-            self.assertEqual(server["url"], expected)
+            self.assertEqual(server["url"], MCP_ENDPOINT)
             self.assertFalse(server.get("headers"))
             for key in ("clientSecret", "client_secret", "access_token", "refresh_token", "bearerToken"):
                 self.assertNotIn(key, server)
@@ -67,6 +74,25 @@ class PluginPackageTests(unittest.TestCase):
         self.assertEqual((ROOT / entry["source"]["path"]).resolve(), PLUGIN.resolve())
         self.assertEqual(entry["policy"], {"installation": "AVAILABLE", "authentication": "ON_INSTALL"})
         self.assertEqual(entry["category"], "Productivity")
+
+    def test_openai_listing_urls_use_https(self):
+        ui = load("plugin.json")["extensions"]["com.openai"]["interface"]
+        for key in OPENAI_LISTING_URLS:
+            self.assertTrue(ui[key].startswith("https://"), key)
+
+    def test_openai_review_has_the_cases_initial_mcp_review_requires(self):
+        review = load("plugin.json")["extensions"]["com.openai"]["review"]
+        positive, negative = review["test_cases"]["positive"], review["test_cases"]["negative"]
+        self.assertEqual(len(positive), 5)
+        self.assertEqual(len(negative), 3)
+        for case in positive:
+            for field in ("description", "prompt", "tools_triggered", "expected_behavior"):
+                self.assertTrue(case.get(field), field)
+        for case in negative:
+            self.assertTrue(case.get("description"))
+            self.assertTrue(case.get("prompt"))
+        for key in ("test_credentials", "reviewer_instructions"):
+            self.assertNotIn(key, review)
 
     def test_claude_marketplace_resolves_plugin_from_repository_root(self):
         catalog = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text())

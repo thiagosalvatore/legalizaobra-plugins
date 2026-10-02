@@ -11,6 +11,12 @@
   fields equal in all three manifests.
 - Verified in Claude Code 2.1.287: install from the local marketplace, OAuth login,
   50 tools listed, and a read-only `get_my_account` call.
+- Move the MCP endpoint in `mcp.json` and `.mcp.json` to
+  `https://api.legalizaobra.com/mcp`.
+- Add the OpenAI directory submission metadata to the root `plugin.json`: listing
+  URLs, capabilities, three default prompts, `brandColor` `#146971`, the onboarding
+  skill, review test cases, and publication settings for Brazil with a pt-BR
+  translation. The Codex manifest repeats the listing fields.
 
 ## 0.2.0
 

@@ -20,6 +20,10 @@ longer shows.
 
 Dark-mode variants (`logoDark`, `composerIconDark`) are not set.
 
+`brandColor` is `#146971`, the teal of the icon. Its contrast is 6.4:1 against white
+and 2.5:1 against `#212121`, so it meets OpenAI's 2:1 minimum in both themes.
+`brandColorDark` is not set, so OpenAI derives it.
+
 Sources:
 - https://developers.openai.com/plugins/deploy/submission
 - https://developers.openai.com/plugins/build/plugins

@@ -20,9 +20,90 @@
         "longDescription": "Connect LegalizaObra to chat to regularize the INSS of construction works in Brazil: register clients, obras and pedreiros, simulate INSS costs, send obras to eSocial and generate each month's DARF. Bundled skills teach the agent each workflow step by step.",
         "developerName": "LegalizaObra",
         "category": "Productivity",
-        "defaultPrompt": "Show me what I can do with my LegalizaObra account.",
+        "defaultPrompt": [
+          "Show me what I can do with my LegalizaObra account.",
+          "Simulate the INSS of a 120 m² house built in São Paulo.",
+          "Which of my obras still need this month's DARF?"
+        ],
         "logo": "./assets/legalizaobra.png",
-        "composerIcon": "./assets/legalizaobra.png"
+        "composerIcon": "./assets/legalizaobra.png",
+        "capabilities": [
+          "Register clients and obras",
+          "Manage pedreiros on an obra",
+          "Simulate INSS and create quotes",
+          "Send obras to eSocial",
+          "Generate the monthly DARF"
+        ],
+        "websiteURL": "https://legalizaobra.com",
+        "supportURL": "https://legalizaobra.com/contato",
+        "privacyPolicyURL": "https://legalizaobra.com/politica-de-privacidade",
+        "termsOfServiceURL": "https://legalizaobra.com/termos-de-uso",
+        "brandColor": "#146971"
+      },
+      "onboardingSkill": "./skills/visao-geral/SKILL.md",
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Show the account and what the plugin can do",
+              "prompt": "Show me what I can do with my LegalizaObra account.",
+              "tools_triggered": "get_my_account",
+              "expected_behavior": "Shows the signed-in account and explains the steps the plugin supports: clients, obras, pedreiros, INSS simulation, eSocial and the monthly DARF. It changes nothing. The answer is in Portuguese, because the server tells the model to answer in Portuguese."
+            },
+            {
+              "description": "List the obras in the account",
+              "prompt": "List my obras and tell me which ones were already sent to eSocial.",
+              "tools_triggered": "list_obras",
+              "expected_behavior": "Lists the obras of the test account with their status, and marks the ones already sent to eSocial. It changes nothing."
+            },
+            {
+              "description": "Show the INSS costs of an obra",
+              "prompt": "How much INSS will my most recent obra cost, and how much does that save compared with the Receita's calculation?",
+              "tools_triggered": "list_obras, get_obra_inss_costs",
+              "expected_behavior": "Finds the most recent obra and shows the original INSS, the optimized INSS and the difference between them. It changes nothing."
+            },
+            {
+              "description": "List the pedreiros of an obra",
+              "prompt": "Which pedreiros work on my most recent obra?",
+              "tools_triggered": "list_obras, get_obra",
+              "expected_behavior": "Finds the most recent obra and lists the pedreiros linked to it. It changes nothing."
+            },
+            {
+              "description": "Get the DARF of a month that was already generated",
+              "prompt": "Get the DARF of last month for my obra that was sent to eSocial.",
+              "tools_triggered": "list_obras, get_obra_monthly_payments, get_darf_link",
+              "expected_behavior": "Finds the month's payment and returns a download link for its DARF PDF. The link expires after 15 minutes. If that month has no DARF yet, it says so and asks before it generates one, because generating a DARF files with the government."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Pay the DARF. The plugin cannot pay or move money. It explains that the client pays the DARF at a bank, and it can offer to email the DARF to the client.",
+              "prompt": "Pay this month's DARF for me from my bank account."
+            },
+            {
+              "description": "Under-declare workers to pay less INSS. The plugin refuses, because it would file false data with the government, and it explains that every pedreiro who works on the obra must be registered.",
+              "prompt": "Register only 2 of the 5 pedreiros on my obra so my client pays less INSS."
+            },
+            {
+              "description": "Read another company's data. The plugin only reads the signed-in account, so it says that it cannot show obras from other accounts.",
+              "prompt": "Show me the obras of another construction company that uses LegalizaObra."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "The plugin does not sell products or process payments. Users pay their LegalizaObra subscription on legalizaobra.com, and their clients pay each DARF directly to the Receita Federal."
+      },
+      "publication": {
+        "countries": [
+          "BR"
+        ],
+        "release_notes": "First directory release. Connects to the LegalizaObra MCP server and bundles seven workflow skills in Portuguese: account overview, clients and obras, INSS simulation and quotes, pedreiros, eSocial, monthly DARF, and closing an obra.",
+        "translations": {
+          "pt-BR": {
+            "subtitle": "Regularize o INSS da sua obra",
+            "description": "Conecte o LegalizaObra ao chat para regularizar o INSS de obras no Brasil: cadastre clientes, obras e pedreiros, simule o INSS, envie a obra ao eSocial e gere a DARF de cada mês. As skills incluídas ensinam cada etapa ao assistente."
+          }
+        }
       }
     }
   },

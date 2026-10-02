@@ -83,10 +83,68 @@ and it blocks symbolic links and `.DS_Store` files in the plugin directory.
 
 ## Public submission
 
-A public GitHub repository is not an OpenAI directory listing. Prepare review,
-branding, authentication and publication metadata separately when public
-submission is requested. Keep credentials, customer records and OAuth tokens out
-of every source tree, archive, test fixture and issue.
+A public GitHub repository is not an OpenAI directory listing. Keep credentials,
+customer records and OAuth tokens out of every source tree, archive, test fixture
+and issue.
+
+## OpenAI directory
+
+The root `plugin.json` holds everything OpenAI imports from the ZIP, under
+`extensions.com.openai`:
+
+- `interface`: the listing text, the four listing URLs, `capabilities`, up to three
+  `defaultPrompt` values, `brandColor` and the icon.
+- `onboardingSkill`: `visao-geral`.
+- `review`: five positive and three negative test cases, and `commerce: false`.
+- `publication`: `countries: ["BR"]`, the release notes and the pt-BR subtitle and
+  description.
+
+Because the root `plugin.json` has `extensions.com.openai`, OpenAI ignores
+`.codex-plugin/plugin.json` for the submission. The Codex manifest repeats the
+`interface` only for Codex installs; the tests keep the two equal.
+
+The review cases name tools that the MCP server exposes. Check them against the
+server's tool list when tools change. Each positive case uses only read-only tools,
+so a reviewer can run it without filing anything with the government.
+
+### Before you upload
+
+1. The MCP server answers at `https://api.legalizaobra.com/mcp`. Once the plugin is
+   published, only OpenAI support can change this URL.
+2. The four listing URLs open, and each page names LegalizaObra:
+   `https://legalizaobra.com`, `/contato`, `/politica-de-privacidade` and
+   `/termos-de-uso`.
+3. The organization at https://platform.openai.com/settings/organization/general has
+   individual or business verification.
+4. A reviewer test account exists. It signs in with email and password, without MFA,
+   email codes or magic links. It has at least two obras, one of them sent to eSocial
+   with a generated DARF, and pedreiros on each obra. Every positive case works with it.
+5. A video shows the five positive cases, and a reviewer can open its URL.
+
+### Upload and submit
+
+1. Run the tests, then build the ZIP:
+   `python3 -m zipfile -c dist/legalizaobra-<version>.zip plugins/legalizaobra`.
+2. At https://platform.openai.com/plugins, select **Upload new or existing plugin**,
+   choose the verified developer identity, and upload the ZIP.
+3. In **Metadata & Skills**, fix every issue and upload a corrected ZIP when needed.
+4. In **MCPs**, select **Connect**. The portal shows a challenge token. Serve it as
+   plain text at `https://api.legalizaobra.com/.well-known/openai-apps-challenge`,
+   then finish the domain check and sign in. Wait for the tool scan.
+5. In **Review information → Review details**, enter the demo video URL and the test
+   account's login URL, email, password and sign-in steps. Never put these in the ZIP.
+6. Select **Submit for review** and complete the attestations. The review team
+   answers by email.
+7. After approval, select **Publish plugin**.
+
+### Risks for the review
+
+- OpenAI's guidelines list government identifiers as restricted data. The tools
+  read and send CPF and CNPJ, because eSocial filings need them. Explain this in the
+  review details; the reviewer may still reject it.
+- OpenAI's guidelines forbid links that start an upgrade or a purchase. The
+  `get_billing_portal_link` tool returns the subscription portal, where a user can
+  change plan. The scan may hold it.
 
 References:
 - https://developers.openai.com/plugins/build/plugins
