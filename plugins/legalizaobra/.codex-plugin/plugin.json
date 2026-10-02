@@ -11,7 +11,7 @@
     "composerIcon": "./assets/legalizaobra.png"
   },
   "name": "legalizaobra",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Connect to the LegalizaObra MCP server and access the tools available to your LegalizaObra account.",
   "author": {
     "name": "LegalizaObra",
@@ -23,5 +23,7 @@
   ],
   "homepage": "https://legalizaobra.com",
   "mcpServers": "./.mcp.json",
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "repository": "https://github.com/thiagosalvatore/legalizaobra-plugins",
+  "license": "MIT"
 }

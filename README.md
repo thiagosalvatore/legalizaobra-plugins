@@ -1,21 +1,24 @@
 # LegalizaObra plugins
 
 Source packages for [LegalizaObra](https://legalizaobra.com) integrations.
-The existing OpenAI plugin is included now. Additional plugins, including Claude
-packages, can be added as separate self-contained directories without moving or
-renaming this package. No Claude plugin is implemented yet.
+One plugin directory serves both OpenAI (ChatGPT and Codex) and Claude (Claude Code,
+claude.ai and Cowork). Each host reads its own manifest; all hosts share the same
+skills, MCP server and icon.
 
 ## Repository layout
 
 ```text
 .agents/plugins/marketplace.json   OpenAI repository marketplace catalog
-plugins/legalizaobra/              Existing OpenAI/portable package
+.claude-plugin/marketplace.json    Claude Code marketplace catalog
+plugins/legalizaobra/              The plugin, for OpenAI and Claude hosts
   plugin.json                     Portable identity and OpenAI presentation
   mcp.json                        Portable MCP configuration
-  .codex-plugin/plugin.json        Compatibility manifest
-  .mcp.json                       Compatibility MCP configuration
+  .codex-plugin/plugin.json        Codex compatibility manifest
+  .claude-plugin/plugin.json       Claude manifest and directory listing fields
+  .mcp.json                       MCP configuration for Codex and Claude Code
   assets/legalizaobra.png         Plugin icon (logo and composer icon)
   skills/<name>/SKILL.md          Workflow skills, written in pt-BR
+  LICENSE                         MIT, for the package files only
 docs/authentication.md            OAuth setup and troubleshooting
 docs/branding.md                  Reusing the existing website icon
 docs/releasing.md                 Packaging and updating the existing plugin
@@ -24,8 +27,8 @@ tests/test_plugins.py             Offline regression checks
 
 ## Current status
 
-The source version is **0.2.0**. It keeps the package name, endpoint and default
-prompt, and adds seven workflow skills and the app icon.
+The source version is **0.3.0**. It adds the Claude manifest and marketplace to the
+0.2.0 package, without changing its name, endpoint, skills or icon.
 
 OAuth login, MCP initialization, tool discovery (50 tools) and a read-only tool call
 were verified against production on 2026-10-02, after the Supabase project moved to
@@ -43,10 +46,14 @@ Python 3.9 or newer is sufficient; the tests use only the standard library.
 
 ```sh
 python3 -m unittest discover -s tests -v
+claude plugin validate --strict plugins/legalizaobra
+claude plugin validate --strict .
 mkdir -p dist
-python3 -m zipfile -c dist/legalizaobra-0.2.0.zip plugins/legalizaobra
-python3 -m zipfile -t dist/legalizaobra-0.2.0.zip
+python3 -m zipfile -c dist/legalizaobra-0.3.0.zip plugins/legalizaobra
+python3 -m zipfile -t dist/legalizaobra-0.3.0.zip
 ```
+
+The `claude plugin validate` commands need Claude Code 2.1.281 or newer.
 
 The plugin ZIP has a single `legalizaobra/` root, including compatibility dotfiles.
 The full repository ZIP is not a single-plugin upload. Never package credentials,
@@ -75,12 +82,25 @@ private copy already installed from Plugin Creator. See
 Choose the repo-distributed or account-distributed copy intentionally; registering
 this marketplace does not migrate the existing private plugin's identity.
 
+## Use from Claude Code
+
+```sh
+claude plugin marketplace add thiagosalvatore/legalizaobra-plugins
+claude plugin install legalizaobra@legalizaobra-plugins
+```
+
+From a local checkout, use `claude plugin marketplace add ./` instead. Then sign in
+once with `/mcp` in a session, or `claude mcp login plugin:legalizaobra:legalizaobra`
+in a terminal. Claude Code registers itself with the OAuth server and opens the
+browser. Skills run as `/legalizaobra:<skill>`, and Claude also picks them by their
+description.
+
 ## Future packages and skills
 
 Add new packages under `plugins/<package-name>/`, each with its host's required
-manifest and only its own files. Do not add a dummy Claude package or claim
-compatibility before implementing and testing it. Keep host-specific catalogs
-separate when their formats differ.
+manifest and only its own files. A new host joins an existing plugin by adding its
+manifest next to the others, as Claude did, rather than by copying the skills.
+Keep host-specific catalogs separate when their formats differ.
 
 Portable skills live at `skills/<skill-name>/SKILL.md` inside a plugin, with a
 `name` that matches the folder and a `description` of when to use it. A skill names
@@ -92,3 +112,6 @@ registry when the server changes.
 - [OpenAI plugin packaging and marketplace format](https://developers.openai.com/plugins/build/plugins)
 - [OpenAI MCP and OAuth client configuration](https://developers.openai.com/codex/mcp)
 - [OpenAI plugin authentication](https://developers.openai.com/plugins/build/auth)
+- [Claude Code plugin manifest](https://code.claude.com/docs/en/plugins-reference)
+- [Claude Code marketplaces](https://code.claude.com/docs/en/plugin-marketplaces)
+- [Claude Code MCP and OAuth](https://code.claude.com/docs/en/mcp)

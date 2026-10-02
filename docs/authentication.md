@@ -133,6 +133,26 @@ This is a compatibility correction, **not a confirmed explanation** for the
 reported missing sign-in window. Modern hosts may read the portable configuration
 instead. No host-side success claim is made from offline checks.
 
+## Claude Code
+
+Claude Code shows the plugin's server as `plugin:legalizaobra:legalizaobra`. Until
+someone signs in, `claude mcp list` reports it as `! Needs authentication`. Sign in
+with `/mcp` in a session, or with this command in a terminal:
+
+```sh
+claude mcp login plugin:legalizaobra:legalizaobra
+```
+
+The command needs an interactive terminal. Claude Code registers a client with the
+Supabase authorization server and opens the browser. The callback goes to a random
+localhost port. Remove the stored token with
+`claude mcp logout plugin:legalizaobra:legalizaobra`.
+
+The Lambda Function URL renames the `WWW-Authenticate` header, and the server does
+not serve `/.well-known/oauth-protected-resource` at the root. Claude Code still
+finds the authorization server: the login on 2026-10-02 with Claude Code 2.1.287
+completed, and a read-only `get_my_account` call succeeded through the plugin.
+
 ## Browser ChatGPT versus desktop
 
 Imported packages that declare MCP servers may be desktop-only even when the URL
@@ -148,3 +168,4 @@ guarantee access or remove host restrictions.
 - [Plugin packaging and authentication policy](https://developers.openai.com/plugins/build/plugins)
 - [Plugins and desktop-only limitations](https://help.openai.com/en/articles/20001256)
 - [Connecting and testing an MCP server](https://developers.openai.com/plugins/deploy/connect-chatgpt)
+- [Claude Code MCP authentication](https://code.claude.com/docs/en/mcp)

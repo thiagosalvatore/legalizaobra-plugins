@@ -5,6 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PLUGIN = ROOT / "plugins" / "legalizaobra"
+SHARED_IDENTITY_FIELDS = ("name", "version", "description", "author", "homepage", "keywords", "repository", "license")
 
 
 def load(relative: str) -> dict:
@@ -22,9 +23,10 @@ def read_frontmatter(path: Path) -> dict:
 
 class PluginPackageTests(unittest.TestCase):
     def test_identity_and_compatibility_metadata_stay_in_sync(self):
-        portable, legacy = load("plugin.json"), load(".codex-plugin/plugin.json")
-        for field in ("name", "version", "description", "author", "homepage", "keywords"):
+        portable, legacy, claude = load("plugin.json"), load(".codex-plugin/plugin.json"), load(".claude-plugin/plugin.json")
+        for field in SHARED_IDENTITY_FIELDS:
             self.assertEqual(portable[field], legacy[field], field)
+            self.assertEqual(portable[field], claude[field], field)
         self.assertEqual(portable["name"], PLUGIN.name)
         self.assertRegex(portable["version"], r"^\d+\.\d+\.\d+$")
         ui = portable["extensions"]["com.openai"]["interface"]
@@ -65,6 +67,19 @@ class PluginPackageTests(unittest.TestCase):
         self.assertEqual((ROOT / entry["source"]["path"]).resolve(), PLUGIN.resolve())
         self.assertEqual(entry["policy"], {"installation": "AVAILABLE", "authentication": "ON_INSTALL"})
         self.assertEqual(entry["category"], "Productivity")
+
+    def test_claude_marketplace_resolves_plugin_from_repository_root(self):
+        catalog = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text())
+        self.assertEqual(len(catalog["plugins"]), 1)
+        entry = catalog["plugins"][0]
+        self.assertEqual(entry["name"], load(".claude-plugin/plugin.json")["name"])
+        self.assertEqual((ROOT / entry["source"]).resolve(), PLUGIN.resolve())
+
+    def test_claude_directory_listing_fields(self):
+        claude = load(".claude-plugin/plugin.json")
+        self.assertEqual(claude["icon"], "./assets/legalizaobra.png")
+        for key in ("supportUrl", "privacyPolicyUrl", "termsOfServiceUrl"):
+            self.assertTrue(claude[key].startswith("https://"), key)
 
     def test_every_skill_declares_matching_name_and_description(self):
         skill_dirs = sorted(path for path in (PLUGIN / "skills").iterdir() if path.is_dir())
