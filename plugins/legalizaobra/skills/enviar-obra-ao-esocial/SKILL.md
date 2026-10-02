@@ -25,13 +25,13 @@ Use `get_my_account` e `get_obra(obra_id)` e confira, nesta ordem:
 
 O cliente autoriza, no portal da Receita, o titular do certificado da conta a enviar por ele. Sem isso, o eSocial e a guia falham por falta de autorização.
 
-1. `get_procuracao_link(client_id)` gera um link com as instruções. O `authorized_document` é o CPF/CNPJ que o cliente tem que autorizar. O link vale 30 dias.
+1. `get_procuracao_link(client_id)` gera um link com as instruções, incluindo o CPF/CNPJ que o cliente tem que autorizar. O link vale 30 dias.
 2. Ou `send_procuracao_email(client_id)` manda o link por e-mail ao cliente (o cliente precisa ter e-mail).
 3. As duas falham se a conta ainda não tem certificado digital.
 4. O que o cliente faz, com uma conta gov.br nível prata ou ouro:
    1. Entra com a conta gov.br em https://servicos.receitafederal.gov.br/servico/autorizacoes.
    2. Clica em "+ Nova Autorização".
-   3. Informa o CPF/CNPJ autorizado, com validade de até 5 anos.
+   3. Informa o CPF/CNPJ autorizado (está no link), com validade de até 5 anos.
    4. Seleciona "Todos" os serviços.
    5. Assina.
 5. O sistema não confere se a procuração foi feita. Pergunte ao usuário se o cliente já concluiu.
@@ -57,5 +57,5 @@ O cliente autoriza, no portal da Receita, o titular do certificado da conta a en
 | "Cadastre ao menos um funcionário" / meses sem pedreiro | Ajustar os pedreiros. |
 | "Já existe um envio em andamento" | Esperar a operação atual terminar. |
 | Erro do servidor do eSocial (301) ou "costuma ser temporário" | Esperar alguns minutos e tentar de novo. Repetir o envio é seguro: o que já foi aceito não é duplicado. |
-| "N trabalhadores rejeitados pelo eSocial" | Mostrar o detalhe de cada pedreiro (CPF, nome, data de nascimento, CEP) e corrigir o dado apontado. |
+| "N trabalhadores rejeitados pelo eSocial" | Mostrar o detalhe de cada pedreiro (nome, data de nascimento, CEP) e corrigir o dado apontado com `update_employee`. Se o problema é o CPF, o usuário corrige no app. |
 | Outra mensagem do eSocial | Mostrar a mensagem como veio e sugerir conferir os dados do cliente e da obra. |

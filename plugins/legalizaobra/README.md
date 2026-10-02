@@ -1,6 +1,6 @@
 # LegalizaObra
 
-Version: 0.3.0
+Version: 0.3.1
 
 LegalizaObra regularizes the INSS of construction works (obras) in Brazil. With this
 plugin, you can ask the assistant to register clients, obras and pedreiros, simulate
@@ -45,7 +45,7 @@ configuration requires it, with the verified callback details.
 Installation alone does not prove authentication. Some hosts initiate OAuth on
 first protected use, or provide a separate Authenticate/Connect action.
 
-OAuth login, MCP initialization, `tools/list` (50 tools) and the read-only
+OAuth login, MCP initialization, `tools/list` and the read-only
 `get_my_account` were verified in Codex on 2026-10-02, and in Claude Code 2.1.287 on
 the same day. Verify with a read-only tool; do not invoke a write to test login.
 

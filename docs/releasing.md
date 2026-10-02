@@ -139,9 +139,9 @@ so a reviewer can run it without filing anything with the government.
 
 ### Risks for the review
 
-- OpenAI's guidelines list government identifiers as restricted data. The tools
-  read and send CPF and CNPJ, because eSocial filings need them. Explain this in the
-  review details; the reviewer may still reject it.
+- OpenAI's guidelines list government identifiers as restricted data. The MCP
+  server does not ask for CPF or CNPJ and does not return them. The user enters
+  them in the app, and the skills never ask the user for them. The DARF, receipt, quote and contract PDFs still show them.
 - OpenAI's guidelines forbid links that start an upgrade or a purchase. The
   `get_billing_portal_link` tool returns the subscription portal, where a user can
   change plan. The scan may hold it.

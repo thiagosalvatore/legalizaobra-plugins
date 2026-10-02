@@ -27,11 +27,11 @@ tests/test_plugins.py             Offline regression checks
 
 ## Current status
 
-The source version is **0.3.0**. It adds the Claude manifest and marketplace, moves
-the MCP endpoint to `https://api.legalizaobra.com/mcp`, and adds the OpenAI directory
-submission metadata. The package name, skills and icon do not change.
+The source version is **0.3.1**. The MCP server no longer asks for or returns CPF and
+CNPJ, and it removed or renamed three tools. The skills now match the server's
+48 tools. The package name and icon do not change.
 
-OAuth login, MCP initialization, tool discovery (50 tools) and a read-only tool call
+OAuth login, MCP initialization, tool discovery and a read-only tool call
 were verified against production on 2026-10-02, after the Supabase project moved to
 ES256 signing keys. See [authentication](docs/authentication.md).
 Installing a plugin and authorizing an account are separate operations.
@@ -50,8 +50,8 @@ python3 -m unittest discover -s tests -v
 claude plugin validate --strict plugins/legalizaobra
 claude plugin validate --strict .
 mkdir -p dist
-python3 -m zipfile -c dist/legalizaobra-0.3.0.zip plugins/legalizaobra
-python3 -m zipfile -t dist/legalizaobra-0.3.0.zip
+python3 -m zipfile -c dist/legalizaobra-0.3.1.zip plugins/legalizaobra
+python3 -m zipfile -t dist/legalizaobra-0.3.1.zip
 ```
 
 The `claude plugin validate` commands need Claude Code 2.1.281 or newer.

@@ -31,7 +31,7 @@ A simulação calcula o INSS de uma obra antes de cadastrá-la. Ela mostra quant
 ## 3. Orçamento
 
 1. `create_quote_from_simulation(simulation_id, quote={…})` (com assinatura):
-   - Informe **um** dos dois: `client_id` (cliente existente) **ou** `client` (dados de um cliente novo: `full_name`, `type`, `document`, `email`, `phone`).
+   - Informe **um** dos dois: `client_id` (cliente existente) **ou** `client` (dados de um cliente novo: `full_name`, `type`, `email`, `phone`). O CPF/CNPJ do cliente é cadastrado no app.
    - `service_price` (> 0) é o preço do serviço do usuário. `description` é opcional.
    - Cada simulação tem um orçamento só ("Esta simulação já tem um orçamento").
    - O resultado traz `client_link`: o link público do orçamento para mandar ao cliente.
@@ -47,9 +47,9 @@ A simulação calcula o INSS de uma obra antes de cadastrá-la. Ela mostra quant
 1. `list_templates(template_type="contract")` para escolher o modelo.
 2. Opcional: prévia com `get_contract_preview_link(quote_id, template_id)`.
 3. `send_contract_for_signature(contract={template_id, quote_id, message?})`. Regras:
-   - O orçamento precisa ter cliente, com documento, e-mail e telefone.
+   - O orçamento precisa ter cliente, com documento, e-mail e telefone. O documento é cadastrado no app.
    - O e-mail de quem assina pela conta tem que ser diferente do e-mail do cliente.
    - Só pode haver um contrato ativo por orçamento.
    O resultado traz os links de assinatura (`signing_urls`).
-4. Acompanhar: `list_documents(status?, client_id?)`. Status: `pending`, `pending_signature`, `signed`, `cancelled`. Evite `get_document` quando não precisar: ele traz o PDF inteiro em base64, que é muito grande.
-5. Cancelar: `delete_document(document_id)`. Isso cancela o contrato de vez e não funciona em contrato já assinado. Confirme antes.
+4. Acompanhar: `list_documents(status?, client_id?)`. Status: `pending`, `pending_signature`, `signed`, `cancelled`. `get_document(document_id)` mostra quem já assinou e os links de assinatura. Para o PDF, use `get_contract_preview_link`.
+5. Cancelar: `cancel_contract_signature(document_id)`. Isso cancela o contrato de vez e não funciona em contrato já assinado. Confirme antes.

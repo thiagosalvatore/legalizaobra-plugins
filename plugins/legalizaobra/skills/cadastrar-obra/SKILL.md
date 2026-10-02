@@ -9,16 +9,16 @@ Toda obra precisa de um cliente (o dono da obra). Crie ou ache o cliente primeir
 
 ## 1. Cliente
 
-1. Procure com `list_clients(name=…)` ou `list_clients(document=…)`. O documento vai só com números.
+1. Procure com `list_clients(name=…)`.
 2. Se não existir, crie com `create_client(client={…})`:
    - `full_name` (obrigatório).
    - `type`: `individual` para pessoa física (CPF) ou `company` para empresa (CNPJ).
-   - `document`: CPF ou CNPJ, conferido pelos dígitos verificadores. Tem que bater com o `type`.
    - `email` e `phone` (10 ou 11 dígitos).
-   - `is_construtora`: só para CNPJ. Marque `true` se a empresa é uma construtora.
-3. **Para criar uma obra, o cliente precisa ter documento, e-mail e telefone.** A descrição de `create_client` diz que são opcionais, mas sem eles `create_obra` falha com "Complete as informações do cliente antes de criar uma obra". Peça os três ao usuário logo no começo.
-4. Para corrigir um cliente, use `update_client(client_id, changes={…})` com só os campos que mudam.
-5. "Já existe um cliente com este documento cadastrado": o cliente já existe. Procure com `list_clients(document=…)` e use esse.
+   - `is_construtora`: só para empresa. Marque `true` se a empresa é uma construtora.
+3. O CPF/CNPJ do cliente não passa por aqui: nunca peça ao usuário. Ele cadastra o documento no app (https://legalizaobra.com), na tela do cliente.
+4. **Para criar uma obra, o cliente precisa ter documento, e-mail e telefone.** Sem eles, `create_obra` falha com "Complete as informações do cliente antes de criar uma obra". Peça o e-mail e o telefone ao usuário logo no começo, e avise que o documento é cadastrado no app.
+5. Para corrigir um cliente, use `update_client(client_id, changes={…})` com só os campos que mudam.
+6. "Já existe um cliente com este documento cadastrado" (no app): o cliente já existe. Procure com `list_clients(name=…)` e use esse.
 
 ## 2. Obra
 
