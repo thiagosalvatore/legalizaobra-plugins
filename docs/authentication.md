@@ -12,6 +12,36 @@ environment, and the connected tools did not expose LegalizaObra. Live server
 behavior and its current response headers could not be inspected. These are
 verification limits, not evidence that the production server is down or broken.
 
+## Login "succeeds" but the server returns 401 (fixed 2026-10-02)
+
+Codex shows its localhost "you can close this window" page as soon as the browser
+returns the authorization code, before it exchanges the code for a token. If the
+exchange fails, Codex saves no credential and sends no token, so every request gets
+`401 invalid_token "Authentication required"`.
+
+The cause was the Supabase project's JWT signing key. Codex requests every scope the
+authorization server advertises, including `openid`. With `openid`, Supabase issues
+an ID token, and it can only sign one with an asymmetric key (RS256 or ES256). The
+project still used the legacy HS256 secret, so the token endpoint returned
+`500 "Error generating ID token"`. Moving the project to an ES256 signing key in
+Project Settings → JWT Keys fixed it. The backend checks tokens with `get_claims`,
+which handles both key types.
+
+To check a login without the plugin, use a separate server name:
+
+```sh
+SERVER='mcp_servers.legalizaobra-debug.url="https://tsixskhxm25cenfxnpcwhhk3ze0wdzxj.lambda-url.sa-east-1.on.aws/mcp"'
+codex mcp login legalizaobra-debug -c "$SERVER"
+codex mcp logout legalizaobra-debug -c "$SERVER"
+```
+
+"Successfully logged in" means the token exchange worked.
+
+The Lambda Function URL renames the 401's `WWW-Authenticate` header to
+`x-amzn-Remapped-www-authenticate`. Codex still finds the metadata at
+`/.well-known/oauth-protected-resource/mcp`, but clients that rely only on the
+header cannot.
+
 ## Installed but no sign-in window
 
 Installation is not authorization. Depending on the host, authentication can occur

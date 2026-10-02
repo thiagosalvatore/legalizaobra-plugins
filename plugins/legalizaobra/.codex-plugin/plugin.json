@@ -2,14 +2,16 @@
   "interface": {
     "displayName": "LegalizaObra",
     "shortDescription": "Access your LegalizaObra tools",
-    "longDescription": "Connect to LegalizaObra and use the capabilities exposed by its MCP server directly in chat. This initial release provides the MCP connection only, without bundled skills or a custom interface.",
+    "longDescription": "Connect LegalizaObra to chat to regularize the INSS of construction works in Brazil: register clients, obras and pedreiros, simulate INSS costs, send obras to eSocial and generate each month's DARF. Bundled skills teach the agent each workflow step by step.",
     "developerName": "LegalizaObra",
     "category": "Productivity",
     "defaultPrompt": "Show me what I can do with my LegalizaObra account.",
-    "capabilities": []
+    "capabilities": [],
+    "logo": "./assets/legalizaobra.png",
+    "composerIcon": "./assets/legalizaobra.png"
   },
   "name": "legalizaobra",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Connect to the LegalizaObra MCP server and access the tools available to your LegalizaObra account.",
   "author": {
     "name": "LegalizaObra",
@@ -20,5 +22,6 @@
     "mcp"
   ],
   "homepage": "https://legalizaobra.com",
-  "mcpServers": "./.mcp.json"
+  "mcpServers": "./.mcp.json",
+  "skills": "./skills/"
 }
