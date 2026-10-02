@@ -1,12 +1,23 @@
 # LegalizaObra
 
-Version: 0.3.1
+Version: 0.3.2
 
-LegalizaObra regularizes the INSS of construction works (obras) in Brazil. With this
-plugin, you can ask the assistant to register clients, obras and pedreiros, simulate
-the INSS of an obra, create quotes, send the obra to eSocial and generate each
-month's DARF, all in your own LegalizaObra account. You need a LegalizaObra account
-to sign in.
+LegalizaObra helps construction professionals regularize the INSS of construction
+works (obras) in Brazil. This plugin connects the assistant to your LegalizaObra
+account, so you can run the whole process in a chat:
+
+- Register clients and obras, and add pedreiros to each obra.
+- Simulate the INSS of an obra, see how much you save, and turn the simulation into
+  a quote or a contract for signature.
+- Request the client's procuração and send the obra and its pedreiros to eSocial.
+- Generate each month's DARF and download the guide.
+- Close an obra when the work ends.
+
+Seven skills in Portuguese guide the assistant through each step. Before any
+official filing with the government, the assistant asks you to confirm. CPF and
+CNPJ never go through the chat: you enter them in the LegalizaObra app.
+
+You need a LegalizaObra account. Sign in with the email you use in the app.
 
 The plugin contains the MCP connection to the existing LegalizaObra service, seven
 workflow skills and the app icon. It runs no local code. It sends requests only to

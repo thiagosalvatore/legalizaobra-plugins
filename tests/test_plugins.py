@@ -99,6 +99,7 @@ class PluginPackageTests(unittest.TestCase):
         self.assertEqual(len(catalog["plugins"]), 1)
         entry = catalog["plugins"][0]
         self.assertEqual(entry["name"], load(".claude-plugin/plugin.json")["name"])
+        self.assertEqual(entry["description"], load(".claude-plugin/plugin.json")["description"])
         self.assertEqual((ROOT / entry["source"]).resolve(), PLUGIN.resolve())
 
     def test_claude_directory_listing_fields(self):

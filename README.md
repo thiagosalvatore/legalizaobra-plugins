@@ -27,9 +27,9 @@ tests/test_plugins.py             Offline regression checks
 
 ## Current status
 
-The source version is **0.3.1**. The MCP server no longer asks for or returns CPF and
-CNPJ, and it removed or renamed three tools. The skills now match the server's
-48 tools. The package name and icon do not change.
+The source version is **0.3.2**. The MCP server no longer asks for or returns CPF and
+CNPJ, and the skills match its 48 tools since 0.3.1. Version 0.3.2 updates the
+listing text to match. The package name and icon do not change.
 
 OAuth login, MCP initialization, tool discovery and a read-only tool call
 were verified against production on 2026-10-02, after the Supabase project moved to
@@ -50,8 +50,8 @@ python3 -m unittest discover -s tests -v
 claude plugin validate --strict plugins/legalizaobra
 claude plugin validate --strict .
 mkdir -p dist
-python3 -m zipfile -c dist/legalizaobra-0.3.1.zip plugins/legalizaobra
-python3 -m zipfile -t dist/legalizaobra-0.3.1.zip
+python3 -m zipfile -c dist/legalizaobra-0.3.2.zip plugins/legalizaobra
+python3 -m zipfile -t dist/legalizaobra-0.3.2.zip
 ```
 
 The `claude plugin validate` commands need Claude Code 2.1.281 or newer.
