@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.3
+
+- Add the demo video for the OpenAI review as `review.demo_recording_url` in the root
+  `plugin.json`. OpenAI requires it for an MCP review. A test checks that it is an
+  HTTPS URL.
+
 ## 0.3.2
 
 - Update the listing text to match 0.3.1. New pedreiros are registered in the app,

@@ -1,6 +1,6 @@
 # LegalizaObra
 
-Version: 0.3.2
+Version: 0.3.3
 
 LegalizaObra helps construction professionals regularize the INSS of construction
 works (obras) in Brazil. This plugin connects the assistant to your LegalizaObra

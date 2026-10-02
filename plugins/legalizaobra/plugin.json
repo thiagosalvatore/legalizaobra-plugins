@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "legalizaobra",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Regularize the INSS of construction works in Brazil: manage clients, obras and pedreiros, simulate INSS costs, send obras to eSocial and generate the monthly DARF.",
   "author": {
     "name": "LegalizaObra",
@@ -90,6 +90,7 @@
             }
           ]
         },
+        "demo_recording_url": "https://drive.google.com/file/d/1Bn2H8lq7xZX_WJOeL5rT8ZZ-WE4C-ePl/view?usp=sharing",
         "commerce": false,
         "commerce_description": "The plugin does not sell products or process payments. Users pay their LegalizaObra subscription on legalizaobra.com, and their clients pay each DARF directly to the Receita Federal."
       },
