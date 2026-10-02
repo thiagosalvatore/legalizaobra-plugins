@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3.2
+
+- Update the listing text to match 0.3.1. New pedreiros are registered in the app,
+  and CPF and CNPJ never go through the chat.
+- The `description` in all three manifests and in `.claude-plugin/marketplace.json`
+  is now one sentence about what the plugin does. A test keeps the Claude marketplace
+  `description` equal to the Claude manifest.
+- Rewrite the plugin `README.md`. The Anthropic directory shows it as the listing
+  description.
+- Update the OpenAI `shortDescription`, `longDescription` and the pt-BR
+  `description`.
+
 ## 0.3.1
 
 - Match the skills to the MCP server after it stopped taking and returning CPF and

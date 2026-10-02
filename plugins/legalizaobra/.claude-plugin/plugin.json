@@ -1,8 +1,8 @@
 {
   "name": "legalizaobra",
   "displayName": "LegalizaObra",
-  "version": "0.3.1",
-  "description": "Connect to the LegalizaObra MCP server and access the tools available to your LegalizaObra account.",
+  "version": "0.3.2",
+  "description": "Regularize the INSS of construction works in Brazil: manage clients, obras and pedreiros, simulate INSS costs, send obras to eSocial and generate the monthly DARF.",
   "author": {
     "name": "LegalizaObra",
     "url": "https://legalizaobra.com"

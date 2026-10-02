@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "legalizaobra",
-  "version": "0.3.1",
-  "description": "Connect to the LegalizaObra MCP server and access the tools available to your LegalizaObra account.",
+  "version": "0.3.2",
+  "description": "Regularize the INSS of construction works in Brazil: manage clients, obras and pedreiros, simulate INSS costs, send obras to eSocial and generate the monthly DARF.",
   "author": {
     "name": "LegalizaObra",
     "url": "https://legalizaobra.com"
@@ -16,8 +16,8 @@
     "com.openai": {
       "interface": {
         "displayName": "LegalizaObra",
-        "shortDescription": "Access your LegalizaObra tools",
-        "longDescription": "Connect LegalizaObra to chat to regularize the INSS of construction works in Brazil: register clients, obras and pedreiros, simulate INSS costs, send obras to eSocial and generate each month's DARF. Bundled skills teach the agent each workflow step by step.",
+        "shortDescription": "Regularize your obra's INSS",
+        "longDescription": "Connect LegalizaObra to chat to regularize the INSS of construction works in Brazil: register clients and obras, add pedreiros to each obra, simulate INSS costs, send obras to eSocial and generate each month's DARF. CPF and CNPJ never go through the chat: the user enters them in the app. Bundled skills teach the agent each workflow step by step.",
         "developerName": "LegalizaObra",
         "category": "Productivity",
         "defaultPrompt": [
@@ -101,7 +101,7 @@
         "translations": {
           "pt-BR": {
             "subtitle": "Regularize o INSS da sua obra",
-            "description": "Conecte o LegalizaObra ao chat para regularizar o INSS de obras no Brasil: cadastre clientes, obras e pedreiros, simule o INSS, envie a obra ao eSocial e gere a DARF de cada mês. As skills incluídas ensinam cada etapa ao assistente."
+            "description": "Conecte o LegalizaObra ao chat para regularizar o INSS de obras no Brasil: cadastre clientes e obras, coloque os pedreiros em cada obra, simule o INSS, envie a obra ao eSocial e gere a DARF de cada mês. CPF e CNPJ não passam pela conversa: você cadastra esses dados no app. As skills incluídas ensinam cada etapa ao assistente."
           }
         }
       }

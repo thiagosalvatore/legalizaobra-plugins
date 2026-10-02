@@ -9,7 +9,7 @@
     {
       "name": "legalizaobra",
       "source": "./plugins/legalizaobra",
-      "description": "Regularize the INSS of construction works in Brazil from Claude: clients, obras, pedreiros, INSS simulations, eSocial and monthly DARF.",
+      "description": "Regularize the INSS of construction works in Brazil: manage clients, obras and pedreiros, simulate INSS costs, send obras to eSocial and generate the monthly DARF.",
       "category": "productivity"
     }
   ]

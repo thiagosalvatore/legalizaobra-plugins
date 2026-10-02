@@ -1,8 +1,8 @@
 {
   "interface": {
     "displayName": "LegalizaObra",
-    "shortDescription": "Access your LegalizaObra tools",
-    "longDescription": "Connect LegalizaObra to chat to regularize the INSS of construction works in Brazil: register clients, obras and pedreiros, simulate INSS costs, send obras to eSocial and generate each month's DARF. Bundled skills teach the agent each workflow step by step.",
+    "shortDescription": "Regularize your obra's INSS",
+    "longDescription": "Connect LegalizaObra to chat to regularize the INSS of construction works in Brazil: register clients and obras, add pedreiros to each obra, simulate INSS costs, send obras to eSocial and generate each month's DARF. CPF and CNPJ never go through the chat: the user enters them in the app. Bundled skills teach the agent each workflow step by step.",
     "developerName": "LegalizaObra",
     "category": "Productivity",
     "defaultPrompt": [
@@ -26,8 +26,8 @@
     "brandColor": "#146971"
   },
   "name": "legalizaobra",
-  "version": "0.3.1",
-  "description": "Connect to the LegalizaObra MCP server and access the tools available to your LegalizaObra account.",
+  "version": "0.3.2",
+  "description": "Regularize the INSS of construction works in Brazil: manage clients, obras and pedreiros, simulate INSS costs, send obras to eSocial and generate the monthly DARF.",
   "author": {
     "name": "LegalizaObra",
     "url": "https://legalizaobra.com"
