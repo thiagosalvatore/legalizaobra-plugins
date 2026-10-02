@@ -1,0 +1,21 @@
+{
+  "name": "legalizaobra",
+  "displayName": "LegalizaObra",
+  "version": "0.3.0",
+  "description": "Connect to the LegalizaObra MCP server and access the tools available to your LegalizaObra account.",
+  "author": {
+    "name": "LegalizaObra",
+    "url": "https://legalizaobra.com"
+  },
+  "homepage": "https://legalizaobra.com",
+  "repository": "https://github.com/thiagosalvatore/legalizaobra-plugins",
+  "license": "MIT",
+  "keywords": [
+    "legalizaobra",
+    "mcp"
+  ],
+  "icon": "./assets/legalizaobra.png",
+  "supportUrl": "https://www.legalizaobra.com/contato",
+  "privacyPolicyUrl": "https://legalizaobra.com/politica-de-privacidade",
+  "termsOfServiceUrl": "https://legalizaobra.com/termos-de-uso"
+}

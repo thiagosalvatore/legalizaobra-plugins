@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "legalizaobra",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Connect to the LegalizaObra MCP server and access the tools available to your LegalizaObra account.",
   "author": {
     "name": "LegalizaObra",
@@ -25,5 +25,7 @@
         "composerIcon": "./assets/legalizaobra.png"
       }
     }
-  }
+  },
+  "repository": "https://github.com/thiagosalvatore/legalizaobra-plugins",
+  "license": "MIT"
 }

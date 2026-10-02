@@ -1,0 +1,16 @@
+{
+  "name": "legalizaobra-plugins",
+  "description": "LegalizaObra plugins for Claude Code",
+  "owner": {
+    "name": "LegalizaObra",
+    "email": "suporte@legalizaobra.com"
+  },
+  "plugins": [
+    {
+      "name": "legalizaobra",
+      "source": "./plugins/legalizaobra",
+      "description": "Regularize the INSS of construction works in Brazil from Claude: clients, obras, pedreiros, INSS simulations, eSocial and monthly DARF.",
+      "category": "productivity"
+    }
+  ]
+}

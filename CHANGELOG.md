@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3.0
+
+- Add the Claude plugin. `plugins/legalizaobra` now has `.claude-plugin/plugin.json`,
+  and the repository root has `.claude-plugin/marketplace.json`. Claude Code uses the
+  same skills, `.mcp.json` and icon as Codex.
+- Add the Anthropic directory listing fields (`icon`, `supportUrl`,
+  `privacyPolicyUrl`, `termsOfServiceUrl`) and an MIT `LICENSE` for the package files.
+- Add `repository` and `license` to all manifests. The tests keep the shared identity
+  fields equal in all three manifests.
+- Verified in Claude Code 2.1.287: install from the local marketplace, OAuth login,
+  50 tools listed, and a read-only `get_my_account` call.
+
 ## 0.2.0
 
 - Add seven pt-BR workflow skills: `visao-geral`, `cadastrar-obra`,
