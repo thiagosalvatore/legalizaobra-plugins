@@ -18,7 +18,7 @@ Use `get_my_account` e `get_obra(obra_id)` e confira, nesta ordem:
 | CNO da obra | `cno` em `get_obra`. | `update_obra(obra_id, changes={cno})` (skill `cadastrar-obra`). |
 | Pelo menos um pedreiro | `employments` em `get_obra`. | Skill `gerenciar-pedreiros`. |
 | Todo mês da obra com um pedreiro ativo | Compare as datas dos vínculos com `start_date`/`end_date` da obra. | Ajuste os vínculos. O erro lista os meses descobertos (MM/AAAA). |
-| Assinatura ativa | `subscription_status` em `get_my_account`. | `get_billing_portal_link`. |
+| Assinatura ativa | `subscription_status` em `get_my_account`. | O usuário assina no app (https://legalizaobra.com). |
 | Ainda não enviada | `esocial_status` = `pendente`. | Se já é `finalizado`, a obra já está no eSocial. |
 
 ## 2. Procuração do cliente
@@ -57,5 +57,5 @@ O cliente autoriza, no portal da Receita, o titular do certificado da conta a en
 | "Cadastre ao menos um funcionário" / meses sem pedreiro | Ajustar os pedreiros. |
 | "Já existe um envio em andamento" | Esperar a operação atual terminar. |
 | Erro do servidor do eSocial (301) ou "costuma ser temporário" | Esperar alguns minutos e tentar de novo. Repetir o envio é seguro: o que já foi aceito não é duplicado. |
-| "N trabalhadores rejeitados pelo eSocial" | Mostrar o detalhe de cada pedreiro (nome, data de nascimento, CEP) e corrigir o dado apontado com `update_employee`. Se o problema é o CPF, o usuário corrige no app. |
+| "N trabalhadores rejeitados pelo eSocial" | Mostrar o motivo de cada pedreiro como veio na mensagem, pedir o dado certo ao usuário e corrigir com `update_employee`. Se o problema é o CPF, o usuário corrige no app. |
 | Outra mensagem do eSocial | Mostrar a mensagem como veio e sugerir conferir os dados do cliente e da obra. |

@@ -19,7 +19,7 @@ A simulação calcula o INSS de uma obra antes de cadastrá-la. Ela mostra quant
 4. Mostre ao usuário: área equivalente (`resulting_area_in_square_meters`), custo estimado (`estimated_cost`), RMT e RMT otimizado (`rmt`, `adjusted_rmt`), INSS original (`inss_owed`), INSS otimizado (`inss_owed_after_optimization`) e a economia (diferença e %).
 5. A tabela mês a mês (`cost_breakdown`) só vem para quem tem assinatura. Se `monthly_breakdown_requires_subscription` for `true`, diga que o detalhe mensal faz parte do plano.
 
-"Você atingiu o limite de simulações gratuitas deste mês": ofereça o plano (`get_billing_portal_link`) ou esperar até `resets_at`.
+"Você atingiu o limite de simulações gratuitas deste mês": diga que o plano é contratado no app (https://legalizaobra.com), ou que o limite volta em `resets_at`.
 
 ## 2. Ajustar a remuneração de um mês (com assinatura)
 

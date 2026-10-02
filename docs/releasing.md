@@ -144,9 +144,12 @@ so a reviewer can run it without filing anything with the government.
 - OpenAI's guidelines list government identifiers as restricted data. The MCP
   server does not ask for CPF or CNPJ and does not return them. The user enters
   them in the app, and the skills never ask the user for them. The DARF, receipt, quote and contract PDFs still show them.
-- OpenAI's guidelines forbid links that start an upgrade or a purchase. The
-  `get_billing_portal_link` tool returns the subscription portal, where a user can
-  change plan. The scan may hold it.
+- OpenAI's guidelines forbid links that start an upgrade or a purchase. The MCP
+  server has no billing tool, and the skills send the user to the app to subscribe
+  or change plan.
+- OpenAI's guidelines say a tool returns only the data its purpose needs. The obra
+  and pedreiro tools return names and ids, not a pedreiro's personal data. Only
+  `update_employee` returns personal data, because it changes it.
 
 References:
 - https://developers.openai.com/plugins/build/plugins
