@@ -1,45 +1,24 @@
-# Use the existing LegalizaObra icon
+# LegalizaObra icon
 
-The owner requested the existing icon from https://legalizaobra.com, not a new
-logo. The original image has not been retrieved: live website/asset downloads
-failed in the preparation environment. No substitute, traced copy, or guessed
-asset URL has been added.
-
-Obtain the exact square brand mark from the website's assets or its source
-repository. Prefer its original sufficiently large PNG or SVG. Do not stretch a
-wide wordmark into a square or claim an upscaled small favicon is high resolution.
-
-For a PNG named `legalizaobra.png`, copy it to:
+The plugin uses the app's current mark: a white house outline inside a teal
+rounded square. The file is a copy of `public/logo_icon.png` from the
+`obra-certa-frontend` repository, unchanged.
 
 ```text
-plugins/legalizaobra/assets/legalizaobra.png
+plugins/legalizaobra/assets/legalizaobra.png   176 x 176 PNG, transparent corners
 ```
 
-OpenAI documents square PNG, JPEG, WebP, or SVG images at least 48 by 48 pixels and
-at most 5 MiB, with raster dimensions no larger than 4096 by 4096. A 512 by 512
-transparent PNG is a useful target when that original asset is available.
+Both manifests reference it as `logo` and `composerIcon`:
+`extensions.com.openai.interface` in `plugin.json`, and `interface` in
+`.codex-plugin/plugin.json`. Paths are relative to the plugin root.
 
-Merge the following into `extensions.com.openai.interface` in the portable
-`plugin.json`, and into `interface` in `.codex-plugin/plugin.json`:
+176 px meets OpenAI's 48 px minimum, but it is not high resolution. When a larger
+original of the same mark exists (512 px PNG or an SVG from the design source),
+replace the file and keep the same path. Do not upscale the 176 px file or use the
+older helmet-and-house mark (`android-chrome-512x512.png`), which the app no
+longer shows.
 
-```json
-{
-  "logo": "./assets/legalizaobra.png",
-  "composerIcon": "./assets/legalizaobra.png"
-}
-```
-
-Use `.svg` in both paths when the actual included file is SVG. Add references only
-after the file exists. Paths are relative to the plugin root, not the directory
-containing the compatibility manifest. Keep metadata, version and defaultPrompt
-synchronized; do not replace the rest of either manifest.
-
-Dark-mode assets are optional. Reuse genuine existing brand assets if available;
-otherwise leave `logoDark`, `composerIconDark`, and brand color overrides unset.
-
-Run the offline tests and inspect the rendered icon in the intended host before
-publishing. Rebuild and update the same private account plugin for that
-installation to receive the icon; a GitHub commit alone does not update it.
+Dark-mode variants (`logoDark`, `composerIconDark`) are not set.
 
 Sources:
 - https://developers.openai.com/plugins/deploy/submission

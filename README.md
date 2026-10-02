@@ -3,17 +3,19 @@
 Source packages for [LegalizaObra](https://legalizaobra.com) integrations.
 The existing OpenAI plugin is included now. Additional plugins, including Claude
 packages, can be added as separate self-contained directories without moving or
-renaming this package. No Claude plugin or skills are implemented in this release.
+renaming this package. No Claude plugin is implemented yet.
 
 ## Repository layout
 
 ```text
 .agents/plugins/marketplace.json   OpenAI repository marketplace catalog
-plugins/legalizaobra/              Existing OpenAI/portable MCP-only package
+plugins/legalizaobra/              Existing OpenAI/portable package
   plugin.json                     Portable identity and OpenAI presentation
   mcp.json                        Portable MCP configuration
   .codex-plugin/plugin.json        Compatibility manifest
   .mcp.json                       Compatibility MCP configuration
+  assets/legalizaobra.png         Plugin icon (logo and composer icon)
+  skills/<name>/SKILL.md          Workflow skills, written in pt-BR
 docs/authentication.md            OAuth setup and troubleshooting
 docs/branding.md                  Reusing the existing website icon
 docs/releasing.md                 Packaging and updating the existing plugin
@@ -22,16 +24,15 @@ tests/test_plugins.py             Offline regression checks
 
 ## Current status
 
-The source version is **0.1.1**, based on the saved private plugin's 0.1.0 source.
-The package preserves its name, endpoint, metadata and default prompt. It corrects
-the legacy transport spelling without changing the portable transport.
+The source version is **0.2.0**. It keeps the package name, endpoint and default
+prompt, and adds seven workflow skills and the app icon.
 
-OAuth is the authentication method reported by the service owner. Successful
-login, authenticated MCP initialization, and tool discovery remain unverified.
+OAuth login, MCP initialization, tool discovery (50 tools) and a read-only tool call
+were verified against production on 2026-10-02, after the Supabase project moved to
+ES256 signing keys. See [authentication](docs/authentication.md).
 Installing a plugin and authorizing an account are separate operations.
 
-The original website icon has **not** been retrieved or bundled. There are no
-placeholder images or broken image references. See [branding](docs/branding.md).
+The icon is the app's current mark. See [branding](docs/branding.md).
 
 Publishing this source to GitHub does not update the existing private account
 plugin, deploy the MCP server, or publish a public directory listing.
@@ -43,8 +44,8 @@ Python 3.9 or newer is sufficient; the tests use only the standard library.
 ```sh
 python3 -m unittest discover -s tests -v
 mkdir -p dist
-python3 -m zipfile -c dist/legalizaobra-0.1.1.zip plugins/legalizaobra
-python3 -m zipfile -t dist/legalizaobra-0.1.1.zip
+python3 -m zipfile -c dist/legalizaobra-0.2.0.zip plugins/legalizaobra
+python3 -m zipfile -t dist/legalizaobra-0.2.0.zip
 ```
 
 The plugin ZIP has a single `legalizaobra/` root, including compatibility dotfiles.
@@ -81,9 +82,10 @@ manifest and only its own files. Do not add a dummy Claude package or claim
 compatibility before implementing and testing it. Keep host-specific catalogs
 separate when their formats differ.
 
-Future portable skills belong at `skills/<skill-name>/SKILL.md` inside a plugin.
-A skill should describe when it applies and how to use actual server tools. Do not
-hardcode tool names, permissions, or scopes that have not been discovered.
+Portable skills live at `skills/<skill-name>/SKILL.md` inside a plugin, with a
+`name` that matches the folder and a `description` of when to use it. A skill names
+only tools the MCP server actually exposes; check them against the server's tool
+registry when the server changes.
 
 ## References
 

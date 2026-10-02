@@ -11,6 +11,15 @@ def load(relative: str) -> dict:
     return json.loads((PLUGIN / relative).read_text(encoding="utf-8"))
 
 
+def read_frontmatter(path: Path) -> dict:
+    lines = path.read_text(encoding="utf-8").splitlines()
+    if not lines or lines[0] != "---":
+        return {}
+    end = lines.index("---", 1)
+    fields = (line.split(":", 1) for line in lines[1:end] if ":" in line)
+    return {key.strip(): value.strip() for key, value in fields}
+
+
 class PluginPackageTests(unittest.TestCase):
     def test_identity_and_compatibility_metadata_stay_in_sync(self):
         portable, legacy = load("plugin.json"), load(".codex-plugin/plugin.json")
@@ -56,6 +65,20 @@ class PluginPackageTests(unittest.TestCase):
         self.assertEqual((ROOT / entry["source"]["path"]).resolve(), PLUGIN.resolve())
         self.assertEqual(entry["policy"], {"installation": "AVAILABLE", "authentication": "ON_INSTALL"})
         self.assertEqual(entry["category"], "Productivity")
+
+    def test_every_skill_declares_matching_name_and_description(self):
+        skill_dirs = sorted(path for path in (PLUGIN / "skills").iterdir() if path.is_dir())
+        self.assertTrue(skill_dirs)
+        for skill_dir in skill_dirs:
+            frontmatter = read_frontmatter(skill_dir / "SKILL.md")
+            self.assertEqual(frontmatter.get("name"), skill_dir.name)
+            self.assertTrue(frontmatter.get("description"), skill_dir.name)
+        self.assertEqual(load(".codex-plugin/plugin.json")["skills"], "./skills/")
+
+    def test_both_manifests_declare_the_bundled_icon(self):
+        portable = load("plugin.json")["extensions"]["com.openai"]["interface"]
+        for key in ("logo", "composerIcon"):
+            self.assertEqual(portable[key], "./assets/legalizaobra.png")
 
     def test_referenced_icons_are_real_contained_files(self):
         ui = load("plugin.json")["extensions"]["com.openai"]["interface"]
