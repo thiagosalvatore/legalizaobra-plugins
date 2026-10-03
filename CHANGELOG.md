@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.5
+
+- The icon is now 1024×1024. The Anthropic directory needs at least 512px, and the
+  old 176px icon did not show in the listing.
+- `assets/legalizaobra.svg` is the source of the icon. Render the PNG with
+  `rsvg-convert -w 1024 -h 1024 assets/legalizaobra.svg -o assets/legalizaobra.png`.
+
 ## 0.3.4
 
 - Match the skills to backend PRs #86 and #87. The MCP server now lists 47 tools.

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 176">
+  <mask id="house-cutout">
+    <rect width="176" height="176" fill="white"/>
+    <g fill="none" stroke="black" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M43.5 78.5L88 43L132.5 78.5"/>
+      <path d="M49 76V125H127V76"/>
+    </g>
+  </mask>
+  <rect x="7" y="9" width="161" height="156" rx="28" fill="#146A73" mask="url(#house-cutout)"/>
+</svg>

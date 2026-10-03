@@ -1,6 +1,6 @@
 # LegalizaObra
 
-Version: 0.3.4
+Version: 0.3.5
 
 LegalizaObra helps construction professionals regularize the INSS of construction
 works (obras) in Brazil. This plugin connects the assistant to your LegalizaObra
@@ -32,7 +32,8 @@ replacement server, custom UI, credentials, or shared tokens.
 - `.claude-plugin/plugin.json`: Claude manifest, with the Anthropic directory
   listing fields (`icon`, `supportUrl`, `privacyPolicyUrl`, `termsOfServiceUrl`).
 - `.mcp.json`: MCP configuration (`type: http`) read by Codex and Claude Code.
-- `assets/legalizaobra.png`: icon used as `logo`, `composerIcon` and Claude `icon`.
+- `assets/legalizaobra.png`: 1024×1024 icon used as `logo`, `composerIcon` and Claude
+  `icon`. It is rendered from `assets/legalizaobra.svg`.
 - `skills/`: workflow skills, in pt-BR.
 - `LICENSE`: MIT, for the files in this package. The service has its own terms.
 
