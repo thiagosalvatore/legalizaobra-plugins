@@ -1,5 +1,6 @@
 """Offline package regression checks; not an OAuth or host integration test."""
 import json
+import struct
 import unittest
 from pathlib import Path
 
@@ -8,6 +9,7 @@ PLUGIN = ROOT / "plugins" / "legalizaobra"
 MCP_ENDPOINT = "https://api.legalizaobra.com/mcp"
 FIRST_DEFAULT_PROMPT = "Show me what I can do with my LegalizaObra account."
 OPENAI_LISTING_URLS = ("websiteURL", "supportURL", "privacyPolicyURL", "termsOfServiceURL")
+CLAUDE_DIRECTORY_MIN_ICON_PIXELS = 512
 SHARED_IDENTITY_FIELDS = ("name", "version", "description", "author", "homepage", "keywords", "repository", "license")
 
 
@@ -22,6 +24,10 @@ def read_frontmatter(path: Path) -> dict:
     end = lines.index("---", 1)
     fields = (line.split(":", 1) for line in lines[1:end] if ":" in line)
     return {key.strip(): value.strip() for key, value in fields}
+
+
+def png_size(path: Path) -> tuple[int, int]:
+    return struct.unpack(">II", path.read_bytes()[16:24])
 
 
 class PluginPackageTests(unittest.TestCase):
@@ -108,6 +114,11 @@ class PluginPackageTests(unittest.TestCase):
         self.assertEqual(claude["icon"], "./assets/legalizaobra.png")
         for key in ("supportUrl", "privacyPolicyUrl", "termsOfServiceUrl"):
             self.assertTrue(claude[key].startswith("https://"), key)
+
+    def test_claude_icon_is_a_square_of_at_least_512_pixels(self):
+        width, height = png_size(PLUGIN / load(".claude-plugin/plugin.json")["icon"])
+        self.assertEqual(width, height)
+        self.assertGreaterEqual(width, CLAUDE_DIRECTORY_MIN_ICON_PIXELS)
 
     def test_every_skill_declares_matching_name_and_description(self):
         skill_dirs = sorted(path for path in (PLUGIN / "skills").iterdir() if path.is_dir())
